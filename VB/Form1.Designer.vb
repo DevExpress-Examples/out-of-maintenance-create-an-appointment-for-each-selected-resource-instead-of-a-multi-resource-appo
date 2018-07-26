@@ -27,9 +27,8 @@
             Dim timeRuler1 As New DevExpress.XtraScheduler.TimeRuler()
             Dim timeRuler2 As New DevExpress.XtraScheduler.TimeRuler()
             Me.schedulerControl1 = New DevExpress.XtraScheduler.SchedulerControl()
-            Me.schedulerStorage1 = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
+            Me.schedulerStorage1 = New DevExpress.XtraScheduler.SchedulerDataStorage(Me.components)
             Me.carSchedulingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-            Me.bindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
             Me.carsDBDataSet_Renamed = New SchedulerMultiResAppointments.CarsDBDataSet()
             Me.carsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.carSchedulingTableAdapter = New SchedulerMultiResAppointments.CarsDBDataSetTableAdapters.CarSchedulingTableAdapter()
@@ -37,7 +36,6 @@
             CType(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.schedulerStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.carSchedulingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.carsDBDataSet_Renamed, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.carsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -48,8 +46,8 @@
             Me.schedulerControl1.Location = New System.Drawing.Point(0, 0)
             Me.schedulerControl1.Name = "schedulerControl1"
             Me.schedulerControl1.Size = New System.Drawing.Size(701, 350)
-            Me.schedulerControl1.Start = New Date(2008, 9, 4, 0, 0, 0, 0)
-            Me.schedulerControl1.Storage = Me.schedulerStorage1
+            Me.schedulerControl1.Start = Date.Today
+            Me.schedulerControl1.DataStorage = Me.schedulerStorage1
             Me.schedulerControl1.TabIndex = 0
             Me.schedulerControl1.Text = "schedulerControl1"
             Me.schedulerControl1.Views.DayView.TimeRulers.Add(timeRuler1)
@@ -80,12 +78,7 @@
             ' carSchedulingBindingSource
             ' 
             Me.carSchedulingBindingSource.DataMember = "CarScheduling"
-            Me.carSchedulingBindingSource.DataSource = Me.bindingSource1
-            ' 
-            ' bindingSource1
-            ' 
-            Me.bindingSource1.DataSource = Me.carsDBDataSet_Renamed
-            Me.bindingSource1.Position = 0
+            Me.carSchedulingBindingSource.DataSource = Me.carsDBDataSet_Renamed
             ' 
             ' carsDBDataSet
             ' 
@@ -95,7 +88,7 @@
             ' carsBindingSource
             ' 
             Me.carsBindingSource.DataMember = "Cars"
-            Me.carsBindingSource.DataSource = Me.bindingSource1
+            Me.carsBindingSource.DataSource = Me.carsDBDataSet_Renamed
             ' 
             ' carSchedulingTableAdapter
             ' 
@@ -116,9 +109,8 @@
             CType(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.schedulerStorage1, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.carSchedulingBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.carsDBDataSet_Renamed, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.carsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.carsDBDataSet_Renamed, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
 
         End Sub
@@ -126,8 +118,7 @@
         #End Region
 
         Private WithEvents schedulerControl1 As DevExpress.XtraScheduler.SchedulerControl
-        Private schedulerStorage1 As DevExpress.XtraScheduler.SchedulerStorage
-        Private bindingSource1 As System.Windows.Forms.BindingSource
+        Private schedulerStorage1 As DevExpress.XtraScheduler.SchedulerDataStorage
 
         Private carsDBDataSet_Renamed As CarsDBDataSet
         Private carSchedulingBindingSource As System.Windows.Forms.BindingSource

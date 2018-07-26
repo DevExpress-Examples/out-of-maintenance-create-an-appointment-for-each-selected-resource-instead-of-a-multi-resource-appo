@@ -19,15 +19,13 @@ Namespace SchedulerMultiResAppointments
             Me.carsTableAdapter.Fill(Me.carsDBDataSet_Renamed.Cars)
             ' TODO: This line of code loads data into the 'carsDBDataSet.CarScheduling' table. You can move, or remove it, as needed.
             Me.carSchedulingTableAdapter.Fill(Me.carsDBDataSet_Renamed.CarScheduling)
-
-            schedulerControl1.Start = schedulerStorage1.Appointments(0).Start
         End Sub
 
         Private Sub schedulerControl1_EditAppointmentFormShowing(ByVal sender As Object, ByVal e As AppointmentFormEventArgs) Handles schedulerControl1.EditAppointmentFormShowing
             Dim apt As Appointment = e.Appointment
 
             ' Required to open the recurrence form via context menu.
-            Dim openRecurrenceForm As Boolean = apt.IsRecurring AndAlso schedulerStorage1.Appointments.IsNewAppointment(apt)
+            Dim openRecurrenceForm As Boolean = apt.Type = AppointmentType.Pattern AndAlso Not schedulerStorage1.Appointments.Items.Contains(apt)
 
             Dim customForm As New CustomAppointmentForm(schedulerControl1, apt, openRecurrenceForm)
 

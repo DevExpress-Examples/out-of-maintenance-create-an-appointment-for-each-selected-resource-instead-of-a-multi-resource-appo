@@ -19,9 +19,9 @@ Namespace SchedulerMultiResAppointments
         ' See its declaration below.
         Private controller As CustomAppointmentFormController
 
-        Protected ReadOnly Property Appointments() As AppointmentStorage
+        Protected ReadOnly Property Appointments() As IAppointmentStorage
             Get
-                Return control.Storage.Appointments
+                Return control.DataStorage.Appointments
             End Get
         End Property
 
@@ -162,8 +162,8 @@ Namespace SchedulerMultiResAppointments
             SuspendUpdate()
             Try
                 txSubject.Text = controller.Subject
-                edStatus.Status = Appointments.Statuses(controller.StatusId)
-                edLabel.Label = Appointments.Labels(controller.LabelId)
+                edStatus.AppointmentStatus = Appointments.Statuses.GetById(controller.StatusKey)
+                edLabel.AppointmentLabel = Appointments.Labels.GetById(controller.LabelKey)
 
                 dtStart.DateTime = controller.DisplayStart.Date
                 dtEnd.DateTime = controller.DisplayEnd.Date
@@ -209,11 +209,11 @@ Namespace SchedulerMultiResAppointments
         End Sub
 
         Private Sub UpdateAppointmentStatus()
-            Dim currentStatus As AppointmentStatus = edStatus.Status
-            Dim newStatus As AppointmentStatus = controller.UpdateAppointmentStatus(currentStatus)
+            Dim currentStatus As IAppointmentStatus = edStatus.AppointmentStatus
+            Dim newStatus As IAppointmentStatus = controller.UpdateStatus(currentStatus)
 
             If newStatus IsNot currentStatus Then
-                edStatus.Status = newStatus
+                edStatus.AppointmentStatus = newStatus
             End If
         End Sub
 
@@ -227,8 +227,8 @@ Namespace SchedulerMultiResAppointments
             End If
 
             controller.Subject = txSubject.Text
-            controller.SetStatus(edStatus.Status)
-            controller.SetLabel(edLabel.Label)
+            controller.SetStatus(edStatus.AppointmentStatus)
+            controller.SetLabel(edLabel.AppointmentLabel)
             controller.AllDay = Me.checkAllDay.Checked
             controller.DisplayStart = Me.dtStart.DateTime.Date + Me.timeStart.Time.TimeOfDay
             controller.DisplayEnd = Me.dtEnd.DateTime.Date + Me.timeEnd.Time.TimeOfDay
@@ -246,7 +246,7 @@ Namespace SchedulerMultiResAppointments
                 Dim apt As Appointment = controller.EditedAppointmentCopy.Copy()
 
                 apt.ResourceId = item
-                control.Storage.Appointments.Add(apt)
+                control.DataStorage.Appointments.Add(apt)
             Next item
         End Sub
         #End Region
