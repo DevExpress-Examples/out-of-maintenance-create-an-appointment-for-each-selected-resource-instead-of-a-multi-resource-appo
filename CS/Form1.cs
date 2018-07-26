@@ -15,20 +15,18 @@ namespace SchedulerMultiResAppointments
             schedulerControl1.GroupType = SchedulerGroupType.Resource;
             schedulerControl1.ActiveViewType = DevExpress.XtraScheduler.SchedulerViewType.Day;
             schedulerControl1.Views.DayView.ResourcesPerPage = 3;
-            
+
             // TODO: This line of code loads data into the 'carsDBDataSet.Cars' table. You can move, or remove it, as needed.
             this.carsTableAdapter.Fill(this.carsDBDataSet.Cars);
             // TODO: This line of code loads data into the 'carsDBDataSet.CarScheduling' table. You can move, or remove it, as needed.
             this.carSchedulingTableAdapter.Fill(this.carsDBDataSet.CarScheduling);
-
-            schedulerControl1.Start = schedulerStorage1.Appointments[0].Start;
         }
 
         private void schedulerControl1_EditAppointmentFormShowing(object sender, AppointmentFormEventArgs e) {
             Appointment apt = e.Appointment;
 
             // Required to open the recurrence form via context menu.
-            bool openRecurrenceForm = apt.IsRecurring && schedulerStorage1.Appointments.IsNewAppointment(apt);
+            bool openRecurrenceForm = apt.Type == AppointmentType.Pattern && !schedulerStorage1.Appointments.Items.Contains(apt);
 
             CustomAppointmentForm customForm = new CustomAppointmentForm(schedulerControl1, apt, openRecurrenceForm);
 

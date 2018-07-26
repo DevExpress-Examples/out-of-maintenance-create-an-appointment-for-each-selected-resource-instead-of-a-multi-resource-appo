@@ -17,8 +17,8 @@ namespace SchedulerMultiResAppointments {
         // See its declaration below.
         CustomAppointmentFormController controller;
 
-        protected AppointmentStorage Appointments {
-            get { return control.Storage.Appointments; }
+        protected IAppointmentStorage Appointments {
+            get { return control.DataStorage.Appointments; }
         }
 
         protected bool IsUpdateSuspended { 
@@ -143,8 +143,8 @@ namespace SchedulerMultiResAppointments {
             SuspendUpdate();
             try {
                 txSubject.Text = controller.Subject;
-                edStatus.Status = Appointments.Statuses[controller.StatusId];
-                edLabel.Label = Appointments.Labels[controller.LabelId];
+                edStatus.AppointmentStatus = Appointments.Statuses.GetById(controller.StatusKey);
+                edLabel.AppointmentLabel = Appointments.Labels.GetById(controller.LabelKey);
 
                 dtStart.DateTime = controller.DisplayStart.Date;
                 dtEnd.DateTime = controller.DisplayEnd.Date;
@@ -191,11 +191,11 @@ namespace SchedulerMultiResAppointments {
         }
 
         void UpdateAppointmentStatus() {
-            AppointmentStatus currentStatus = edStatus.Status;
-            AppointmentStatus newStatus = controller.UpdateAppointmentStatus(currentStatus);
+            IAppointmentStatus currentStatus = edStatus.AppointmentStatus;
+            IAppointmentStatus newStatus = controller.UpdateStatus(currentStatus);
             
             if (newStatus != currentStatus)
-                edStatus.Status = newStatus;
+                edStatus.AppointmentStatus = newStatus;
         }
 
         #endregion
@@ -207,8 +207,8 @@ namespace SchedulerMultiResAppointments {
                 return;
 
             controller.Subject = txSubject.Text;
-            controller.SetStatus(edStatus.Status);
-            controller.SetLabel(edLabel.Label);
+            controller.SetStatus(edStatus.AppointmentStatus);
+            controller.SetLabel(edLabel.AppointmentLabel);
             controller.AllDay = this.checkAllDay.Checked;
             controller.DisplayStart = this.dtStart.DateTime.Date + this.timeStart.Time.TimeOfDay;
             controller.DisplayEnd = this.dtEnd.DateTime.Date + this.timeEnd.Time.TimeOfDay;
@@ -225,7 +225,7 @@ namespace SchedulerMultiResAppointments {
                 Appointment apt = controller.EditedAppointmentCopy.Copy();
 
                 apt.ResourceId = item;
-                control.Storage.Appointments.Add(apt);
+                control.DataStorage.Appointments.Add(apt);
             }
         }
         #endregion
