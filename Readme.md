@@ -1,3 +1,10 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [CustomAppointmentForm.cs](./CS/CustomAppointmentForm.cs) (VB: [CustomAppointmentForm.vb](./VB/CustomAppointmentForm.vb))
+* [Form1.cs](./CS/Form1.cs) (VB: [Form1.vb](./VB/Form1.vb))
+* [Program.cs](./CS/Program.cs) (VB: [Program.vb](./VB/Program.vb))
+<!-- default file list end -->
 # Create an appointment for each selected resource instead of a multi-resource appointment
 
 
