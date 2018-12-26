@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="CarsXtraSchedulingConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="CarsXtraSchedulingConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SchedulerMultiResAppointments.Properties.Settings.GlobalReference.Default.CarsXtraSchedulingConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="CarsXtraSchedulingConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="CarsXtraSchedulingConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Settings.GlobalReference.Default.CarsXtraSchedulingConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CarsTableAdapter" GeneratorDataComponentClassName="CarsTableAdapter" Name="Cars" UserDataComponentName="CarsTableAdapter">
