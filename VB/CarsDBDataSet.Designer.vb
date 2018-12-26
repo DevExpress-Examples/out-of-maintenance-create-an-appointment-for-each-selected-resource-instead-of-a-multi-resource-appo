@@ -8,7 +8,7 @@
 ' </auto-generated>
 '------------------------------------------------------------------------------
 
-#Disable Warning 1591
+'#Disable Warning 1591
 
 Namespace SchedulerMultiResAppointments
 
@@ -2727,4 +2727,4 @@ SELECT ID, CarId, UserId, Status, Subject, Description, Label, StartTime, EndTim
     End Class
 End Namespace
 
-#Enable Warning 1591
+'#Enable Warning 1591
